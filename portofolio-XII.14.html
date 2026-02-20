@@ -1,0 +1,766 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Portofolio Kelas XII.14</title>
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@700;900&family=DM+Sans:wght@300;400;500&display=swap" rel="stylesheet" />
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    :root {
+      --bg: #0a0a0f;
+      --surface: #13131c;
+      --card: #1a1a28;
+      --accent: #f4c430;
+      --accent2: #e07b54;
+      --text: #f0ede8;
+      --muted: #8a8a9a;
+      --border: rgba(244,196,48,0.15);
+    }
+
+    html { scroll-behavior: smooth; }
+
+    body {
+      background: var(--bg);
+      color: var(--text);
+      font-family: 'DM Sans', sans-serif;
+      overflow-x: hidden;
+    }
+
+    /* NOISE OVERLAY */
+    body::before {
+      content: '';
+      position: fixed;
+      inset: 0;
+      background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='0.04'/%3E%3C/svg%3E");
+      pointer-events: none;
+      z-index: 0;
+      opacity: 0.4;
+    }
+
+    /* NAV */
+    nav {
+      position: fixed;
+      top: 0; left: 0; right: 0;
+      z-index: 100;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 1.2rem 4rem;
+      background: rgba(10,10,15,0.85);
+      backdrop-filter: blur(16px);
+      border-bottom: 1px solid var(--border);
+    }
+
+    .nav-brand {
+      font-family: 'Playfair Display', serif;
+      font-size: 1.5rem;
+      color: var(--accent);
+      letter-spacing: -0.5px;
+    }
+
+    .nav-links { display: flex; gap: 2rem; }
+    .nav-links a {
+      color: var(--muted);
+      text-decoration: none;
+      font-size: 0.9rem;
+      font-weight: 500;
+      letter-spacing: 0.05em;
+      text-transform: uppercase;
+      transition: color 0.3s;
+    }
+    .nav-links a:hover { color: var(--accent); }
+
+    /* HERO */
+    .hero {
+      min-height: 100vh;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+      text-align: center;
+      padding: 8rem 2rem 4rem;
+      position: relative;
+    }
+
+    .hero::before {
+      content: 'XII.14';
+      position: absolute;
+      font-family: 'Playfair Display', serif;
+      font-size: clamp(8rem, 25vw, 22rem);
+      font-weight: 900;
+      color: rgba(244,196,48,0.04);
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%);
+      pointer-events: none;
+      white-space: nowrap;
+    }
+
+    .hero-tag {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.5rem;
+      background: rgba(244,196,48,0.1);
+      border: 1px solid var(--border);
+      color: var(--accent);
+      padding: 0.35rem 1rem;
+      border-radius: 100px;
+      font-size: 0.8rem;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      margin-bottom: 2rem;
+      animation: fadeUp 0.8s ease both;
+    }
+
+    .hero h1 {
+      font-family: 'Playfair Display', serif;
+      font-size: clamp(3rem, 8vw, 6.5rem);
+      font-weight: 900;
+      line-height: 1.05;
+      letter-spacing: -2px;
+      margin-bottom: 1.5rem;
+      animation: fadeUp 0.8s 0.15s ease both;
+    }
+
+    .hero h1 span { color: var(--accent); }
+
+    .hero p {
+      max-width: 560px;
+      color: var(--muted);
+      font-size: 1.1rem;
+      line-height: 1.75;
+      animation: fadeUp 0.8s 0.3s ease both;
+      margin-bottom: 3rem;
+    }
+
+    .hero-stats {
+      display: flex;
+      gap: 3rem;
+      animation: fadeUp 0.8s 0.45s ease both;
+    }
+
+    .stat { text-align: center; }
+    .stat-num {
+      font-family: 'Playfair Display', serif;
+      font-size: 2.5rem;
+      font-weight: 700;
+      color: var(--accent);
+      display: block;
+    }
+    .stat-label { font-size: 0.8rem; color: var(--muted); text-transform: uppercase; letter-spacing: 0.1em; }
+
+    /* SECTION */
+    section { padding: 5rem 4rem; max-width: 1300px; margin: 0 auto; }
+
+    .section-label {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.75rem;
+      color: var(--accent);
+      font-size: 0.8rem;
+      letter-spacing: 0.15em;
+      text-transform: uppercase;
+      font-weight: 500;
+      margin-bottom: 1rem;
+    }
+
+    .section-label::before {
+      content: '';
+      width: 2rem;
+      height: 1px;
+      background: var(--accent);
+    }
+
+    .section-title {
+      font-family: 'Playfair Display', serif;
+      font-size: clamp(2rem, 4vw, 3.5rem);
+      font-weight: 700;
+      line-height: 1.1;
+      margin-bottom: 3.5rem;
+      letter-spacing: -1px;
+    }
+
+    /* FILTER */
+    .filter-bar {
+      display: flex;
+      gap: 0.75rem;
+      flex-wrap: wrap;
+      margin-bottom: 2.5rem;
+    }
+
+    .filter-btn {
+      padding: 0.5rem 1.25rem;
+      border-radius: 100px;
+      border: 1px solid var(--border);
+      background: transparent;
+      color: var(--muted);
+      font-family: 'DM Sans', sans-serif;
+      font-size: 0.85rem;
+      cursor: pointer;
+      transition: all 0.25s;
+    }
+
+    .filter-btn.active,
+    .filter-btn:hover {
+      background: var(--accent);
+      color: #000;
+      border-color: var(--accent);
+      font-weight: 500;
+    }
+
+    /* STUDENT GRID */
+    .student-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+      gap: 1.5rem;
+    }
+
+    .student-card {
+      background: var(--card);
+      border: 1px solid var(--border);
+      border-radius: 16px;
+      padding: 2rem;
+      transition: all 0.35s ease;
+      cursor: pointer;
+      position: relative;
+      overflow: hidden;
+      animation: fadeUp 0.5s ease both;
+    }
+
+    .student-card::after {
+      content: '';
+      position: absolute;
+      inset: 0;
+      background: linear-gradient(135deg, rgba(244,196,48,0.05), transparent);
+      opacity: 0;
+      transition: opacity 0.35s;
+    }
+
+    .student-card:hover {
+      transform: translateY(-6px);
+      border-color: rgba(244,196,48,0.4);
+      box-shadow: 0 20px 60px rgba(0,0,0,0.5), 0 0 0 1px rgba(244,196,48,0.1);
+    }
+
+    .student-card:hover::after { opacity: 1; }
+
+    .card-avatar {
+      width: 64px;
+      height: 64px;
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-family: 'Playfair Display', serif;
+      font-size: 1.5rem;
+      font-weight: 700;
+      color: #000;
+      margin-bottom: 1.25rem;
+      position: relative;
+      z-index: 1;
+    }
+
+    .card-num {
+      position: absolute;
+      top: 1.25rem;
+      right: 1.25rem;
+      font-size: 0.75rem;
+      color: var(--muted);
+      background: rgba(255,255,255,0.05);
+      padding: 0.25rem 0.6rem;
+      border-radius: 100px;
+    }
+
+    .card-name {
+      font-family: 'Playfair Display', serif;
+      font-size: 1.2rem;
+      font-weight: 700;
+      margin-bottom: 0.4rem;
+      position: relative;
+      z-index: 1;
+    }
+
+    .card-role {
+      font-size: 0.82rem;
+      color: var(--accent);
+      margin-bottom: 0.75rem;
+      letter-spacing: 0.05em;
+    }
+
+    .card-bio {
+      font-size: 0.85rem;
+      color: var(--muted);
+      line-height: 1.65;
+      margin-bottom: 1.25rem;
+    }
+
+    .card-tags {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 0.4rem;
+    }
+
+    .tag {
+      font-size: 0.72rem;
+      padding: 0.2rem 0.65rem;
+      border-radius: 100px;
+      border: 1px solid rgba(255,255,255,0.08);
+      color: var(--muted);
+    }
+
+    /* SEARCH */
+    .search-wrap {
+      position: relative;
+      max-width: 480px;
+      margin-bottom: 2rem;
+    }
+
+    .search-input {
+      width: 100%;
+      background: var(--card);
+      border: 1px solid var(--border);
+      color: var(--text);
+      padding: 0.85rem 1rem 0.85rem 3rem;
+      border-radius: 12px;
+      font-family: 'DM Sans', sans-serif;
+      font-size: 0.95rem;
+      outline: none;
+      transition: border-color 0.25s;
+    }
+
+    .search-input:focus { border-color: rgba(244,196,48,0.5); }
+
+    .search-icon {
+      position: absolute;
+      left: 1rem;
+      top: 50%;
+      transform: translateY(-50%);
+      color: var(--muted);
+      font-size: 1rem;
+    }
+
+    /* MODAL */
+    .modal-overlay {
+      position: fixed;
+      inset: 0;
+      background: rgba(0,0,0,0.8);
+      backdrop-filter: blur(12px);
+      z-index: 200;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      padding: 2rem;
+      opacity: 0;
+      pointer-events: none;
+      transition: opacity 0.3s;
+    }
+
+    .modal-overlay.open { opacity: 1; pointer-events: all; }
+
+    .modal {
+      background: var(--card);
+      border: 1px solid rgba(244,196,48,0.2);
+      border-radius: 24px;
+      padding: 3rem;
+      max-width: 540px;
+      width: 100%;
+      position: relative;
+      transform: scale(0.9) translateY(20px);
+      transition: transform 0.35s cubic-bezier(0.34, 1.56, 0.64, 1);
+    }
+
+    .modal-overlay.open .modal { transform: scale(1) translateY(0); }
+
+    .modal-close {
+      position: absolute;
+      top: 1.5rem;
+      right: 1.5rem;
+      background: rgba(255,255,255,0.06);
+      border: none;
+      color: var(--muted);
+      width: 36px;
+      height: 36px;
+      border-radius: 50%;
+      cursor: pointer;
+      font-size: 1.1rem;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      transition: all 0.2s;
+    }
+
+    .modal-close:hover { background: rgba(255,255,255,0.12); color: var(--text); }
+
+    .modal-avatar {
+      width: 80px;
+      height: 80px;
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-family: 'Playfair Display', serif;
+      font-size: 2rem;
+      font-weight: 700;
+      color: #000;
+      margin-bottom: 1.5rem;
+    }
+
+    .modal-name {
+      font-family: 'Playfair Display', serif;
+      font-size: 2rem;
+      font-weight: 700;
+      margin-bottom: 0.5rem;
+    }
+
+    .modal-role { color: var(--accent); font-size: 0.9rem; margin-bottom: 1.25rem; }
+
+    .modal-info-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 1rem;
+      margin: 1.5rem 0;
+    }
+
+    .info-item label { font-size: 0.72rem; color: var(--muted); text-transform: uppercase; letter-spacing: 0.1em; display: block; margin-bottom: 0.25rem; }
+    .info-item span { font-size: 0.92rem; }
+
+    .modal-tags { display: flex; flex-wrap: wrap; gap: 0.5rem; }
+    .modal-tag {
+      padding: 0.35rem 0.9rem;
+      border-radius: 100px;
+      background: rgba(244,196,48,0.1);
+      border: 1px solid rgba(244,196,48,0.2);
+      color: var(--accent);
+      font-size: 0.8rem;
+    }
+
+    /* ABOUT SECTION */
+    .about-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 4rem;
+      align-items: center;
+    }
+
+    .about-text p {
+      color: var(--muted);
+      line-height: 1.9;
+      margin-bottom: 1rem;
+      font-size: 1rem;
+    }
+
+    .about-highlights {
+      display: flex;
+      flex-direction: column;
+      gap: 1.25rem;
+    }
+
+    .highlight-item {
+      display: flex;
+      gap: 1.25rem;
+      align-items: flex-start;
+      background: var(--card);
+      border: 1px solid var(--border);
+      border-radius: 14px;
+      padding: 1.25rem 1.5rem;
+      transition: border-color 0.3s;
+    }
+
+    .highlight-item:hover { border-color: rgba(244,196,48,0.3); }
+
+    .highlight-icon {
+      font-size: 1.5rem;
+      flex-shrink: 0;
+      width: 48px;
+      height: 48px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      background: rgba(244,196,48,0.1);
+      border-radius: 12px;
+    }
+
+    .highlight-content h4 { font-size: 1rem; margin-bottom: 0.3rem; font-weight: 500; }
+    .highlight-content p { font-size: 0.85rem; color: var(--muted); margin: 0; }
+
+    /* FOOTER */
+    footer {
+      border-top: 1px solid var(--border);
+      padding: 2.5rem 4rem;
+      text-align: center;
+      color: var(--muted);
+      font-size: 0.85rem;
+    }
+
+    footer span { color: var(--accent); }
+
+    /* ANIMATIONS */
+    @keyframes fadeUp {
+      from { opacity: 0; transform: translateY(24px); }
+      to   { opacity: 1; transform: translateY(0); }
+    }
+
+    .hidden { display: none !important; }
+
+    /* SCROLLBAR */
+    ::-webkit-scrollbar { width: 6px; }
+    ::-webkit-scrollbar-track { background: var(--bg); }
+    ::-webkit-scrollbar-thumb { background: var(--border); border-radius: 100px; }
+
+    @media (max-width: 768px) {
+      nav { padding: 1rem 1.5rem; }
+      .nav-links { display: none; }
+      section { padding: 4rem 1.5rem; }
+      .about-grid { grid-template-columns: 1fr; }
+      footer { padding: 2rem 1.5rem; }
+    }
+  </style>
+</head>
+<body>
+
+<!-- NAV -->
+<nav>
+  <div class="nav-brand">XII.14</div>
+  <div class="nav-links">
+    <a href="#beranda">Beranda</a>
+    <a href="#siswa">Siswa</a>
+    <a href="#tentang">Tentang</a>
+  </div>
+</nav>
+
+<!-- HERO -->
+<div class="hero" id="beranda">
+  <div class="hero-tag">✦ Angkatan 2025 – 2026</div>
+  <h1>Portofolio<br/><span>Kelas XII.14</span></h1>
+  <p>Menampilkan profil, prestasi, dan keahlian siswa-siswi terbaik Kelas XII.14 dalam satu halaman yang elegan.</p>
+  <div class="hero-stats">
+    <div class="stat">
+      <span class="stat-num" id="totalSiswa">36</span>
+      <span class="stat-label">Siswa</span>
+    </div>
+    <div class="stat">
+      <span class="stat-num">1</span>
+      <span class="stat-label">Kelas</span>
+    </div>
+    <div class="stat">
+      <span class="stat-num">∞</span>
+      <span class="stat-label">Potensi</span>
+    </div>
+  </div>
+</div>
+
+<!-- SISWA -->
+<section id="siswa">
+  <div class="section-label">Profil Siswa</div>
+  <h2 class="section-title">Kenali<br/>Kami Semua</h2>
+
+  <div class="search-wrap">
+    <span class="search-icon">🔍</span>
+    <input class="search-input" id="searchInput" type="text" placeholder="Cari nama siswa..." />
+  </div>
+
+  <div class="filter-bar" id="filterBar">
+    <button class="filter-btn active" data-filter="semua">Semua</button>
+    <button class="filter-btn" data-filter="ipa">Sains & Teknologi</button>
+    <button class="filter-btn" data-filter="seni">Seni & Kreativitas</button>
+    <button class="filter-btn" data-filter="sosial">Sosial & Komunikasi</button>
+    <button class="filter-btn" data-filter="olahraga">Olahraga</button>
+  </div>
+
+  <div class="student-grid" id="studentGrid"></div>
+</section>
+
+<!-- TENTANG -->
+<section id="tentang">
+  <div class="about-grid">
+    <div class="about-text">
+      <div class="section-label">Tentang Kami</div>
+      <h2 class="section-title">Kelas yang<br/>Penuh Semangat</h2>
+      <p>Kelas XII.14 adalah kumpulan individu-individu luar biasa dengan latar belakang, bakat, dan minat yang beragam. Bersama-sama kami saling mendukung dan tumbuh.</p>
+      <p>Portofolio ini dibuat sebagai kenangan, dokumentasi, dan bukti bahwa kami pernah berjuang bersama menuju impian masing-masing.</p>
+    </div>
+    <div class="about-highlights">
+      <div class="highlight-item">
+        <div class="highlight-icon">🏆</div>
+        <div class="highlight-content">
+          <h4>Prestasi Akademik</h4>
+          <p>Banyak siswa meraih prestasi di bidang akademik, dan lomba ilmiah.</p>
+        </div>
+      </div>
+      <div class="highlight-item">
+        <div class="highlight-icon">🎨</div>
+        <div class="highlight-content">
+          <h4>Kreativitas Tinggi</h4>
+          <p>Dari seni, desain, hingga musik — kelas kami dipenuhi bakat kreatif yang menginspirasi.</p>
+        </div>
+      </div>
+      <div class="highlight-item">
+        <div class="highlight-icon">🤝</div>
+        <div class="highlight-content">
+          <h4>Solidaritas Kuat</h4>
+          <p>Kebersamaan dan saling mendukung menjadi pondasi kuat Kelas XII.14.</p>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- FOOTER -->
+<footer>
+  <p>Dibuat dengan ❤️ oleh <span>Kelas XII.14</span> · Tahun Ajaran 2025/2026</p>
+</footer>
+
+<!-- MODAL -->
+<div class="modal-overlay" id="modalOverlay">
+  <div class="modal" id="modalBox">
+    <button class="modal-close" id="modalClose">✕</button>
+    <div class="modal-avatar" id="mAvatar"></div>
+    <div class="modal-name" id="mName"></div>
+    <div class="modal-role" id="mRole"></div>
+    <p style="color:var(--muted);font-size:0.9rem;line-height:1.7;margin-bottom:1.25rem;" id="mBio"></p>
+    <div class="modal-info-grid">
+      <div class="info-item"><label>No. Absen</label><span id="mNo"></span></div>
+      <div class="info-item"><label>Keahlian Utama</label><span id="mSkill"></span></div>
+      <div class="info-item"><label>Cita-cita</label><span id="mGoal"></span></div>
+      <div class="info-item"><label>Motto</label><span id="mMotto"></span></div>
+    </div>
+    <div class="modal-tags" id="mTags"></div>
+  </div>
+</div>
+
+<script>
+const COLORS = [
+  '#f4c430','#e07b54','#5ec4a1','#7eb8f7','#c97be8',
+  '#f06292','#4db6ac','#ffb74d','#a1c45a','#64b5f6'
+];
+
+const CATEGORIES = {
+  ipa: 'Sains & Teknologi',
+  seni: 'Seni & Kreativitas',
+  sosial: 'Sosial & Komunikasi',
+  olahraga: 'Olahraga'
+};
+
+const siswaList = [
+  { no:1,  nama:'Vino Alimazt Andrean',      peran:'Ketua Kelas',      kategori:'sosial',  keahlian:'Kepemimpinan', cita:'Admin Slot',      motto:'Pemimpin sejati melayani.',             bio:'Sosok yang tegas namun peduli, Adi menjadi tulang punggung kelas dalam setiap kegiatan.',         tags:['Kepemimpinan','Organisasi','Komunikasi'] },
+  { no:2,  nama:'Fadika Suci Budiyanto',       peran:'Wakil Ketua',      kategori:'sosial',  keahlian:'Mediasi',      cita:'CEO',      motto:'Dengarkan sebelum berbicara.',           bio:'Budi dikenal sebagai pendengar yang baik dan mampu menyelesaikan konflik dengan bijaksana.',    tags:['Empati','Psikologi','Sosial'] },
+  { no:3,  nama:'Aditya Rizky Rachel',    peran:'Sekretaris',       kategori:'sosial',     keahlian:'Penulisan',    cita:'Penulis',       motto:'Kata-kata mengubah dunia.',              bio:'Adit mencatat setiap momen kelas dengan presisi dan menggemari sastra modern.',                  tags:['Menulis','Sastra','Dokumentasi'] },
+  { no:4,  nama:'Aurora Justicia Alphanorisma',       peran:'Bendahara',        kategori:'sosial',     keahlian:'Akuntansi',    cita:'Akuntan',       motto:'Angka tidak bohong.',                    bio:'Rora teliti dan jujur dalam mengelola keuangan kelas.',       tags:['Matematika','Keuangan','Analitik'] },
+  { no:5,  nama:'Bagas Wahyu Pamungkas',      peran:'Humas',            kategori:'seni',    keahlian:'Desain',       cita:'UI/UX Designer',motto:'Desain adalah solusi visual.',           bio:'Bagas Wahyu membuat berbagai materi visual kelas yang memukau. Karya-karyanya tampil di pameran sekolah.',tags:['Desain','Ilustrasi','Kreatif'] },
+  { no:6,  nama:'Khanif Rofiqul Muslim',      peran:'Anggota',          kategori:'seni',    keahlian:'Vokal',        cita:'Masinis',        motto:'Musik adalah bahasa jiwa.',              bio:'Khanif memiliki suara emas dan sering bernyanyi saat jamkos.',               tags:['Musik','Vokal','Seni Pertunjukan'] },
+  { no:7,  nama:'Aditya Nugraha',    peran:'Anggota',          kategori:'ipa',keahlian:'Networking',       cita:'Teknisi Jaringan',         motto:'Kerja keras mengalahkan bakat.',         bio:'Adit Nug sangat terampil dalam mengelola jaringan komputer sekolah.',                           tags:['Networking','Teknologi','Jaringan'] },
+  { no:8,  nama:'Andika Surya Aditama',      peran:'Anggota',          kategori:'ipa',     keahlian:'Kelistrikan',      cita:'Teknisi Listrik',        motto:'Kelistrikan adalah dasar kehidupan modern.',        bio:'Surya sangat terampil dalam bidang kelistrikan dan sering membantu teknisi sekolah.',                     tags:['Kelistrikan','Teknik','Keterampilan'] },
+  { no:9,  nama:'Bagas Zakyan Syabana',      peran:'Anggota',          kategori:'ipa',     keahlian:'Programming',  cita:'Software Engineer',motto:'Kode adalah seni logika.',           bio:'Bagas Zakyan mampu membangun aplikasi sejak kelas 10. Ia sering membuat aplikasi berbasis web saat gabut.',    tags:['Coding','Teknologi','Logika'] },
+  { no:10, nama:'Devi Sulistyowati',     peran:'Anggota',          kategori:'seni',    keahlian:'Tari',         cita:'Koreografer',   motto:'Gerak adalah ekspresi terdalam.',        bio:'Devi aktif dalam ekskul tari dan telah tampil di festival budaya sekolah.',                    tags:['Tari','Seni','Budaya'] },
+  { no:11, nama:'Hasta Adhitama Listyanto',    peran:'Anggota',          kategori:'ipa',     keahlian:'Kelistrikan',       cita:'Insinyur',      motto:'Listrik adalah kunci kehidupan modern.',            bio:'Hasta sangat terampil dalam bidang kelistrikan dan sering membantu guru mapel kelistrikan.',                          tags:['Kelistrikan','Teknik','Keterampilam'] },
+  { no:12, nama:'Habib abdullah',    peran:'Anggota',          kategori:'seni',    keahlian:'Melukis',      cita:'Seniman',       motto:'Kanvas adalah duniaku.',                 bio:'Karya lukisan Habib dipajang di mading sekolah. Ia terinspirasi dari alam Nusantara.',             tags:['Lukis','Seni Rupa','Estetika'] },
+  { no:13, nama:'Iqbal Maulana Firmansyah',   peran:'Anggota',          kategori:'olahraga',keahlian:'Futsal',       cita:'Pelatih',       motto:'Tim yang solid, juara pasti.',           bio:'Iqbal adalah pemain kunci tim futsal yang membawa kelas ke final sekolah.',                   tags:['Futsal','Tim','Sportivitas'] },
+  { no:14, nama:'Vania Azalia Putri',   peran:'Anggota',          kategori:'sosial',  keahlian:'Debat',        cita:'Pengacara',     motto:'Argumen kuat, dunia bergerak.',          bio:'Vania juara debat tingkat sekolah tiga kali berturut-turut. Ia fasih berbicara di depan umum.',        tags:['Debat','Hukum','Retorika'] },
+  { no:15, nama:'Ilham Fajar Adi Saputra',   peran:'Anggota',          kategori:'ipa',     keahlian:'Kimia',        cita:'Peneliti',      motto:'Eksperimen mengungkap kebenaran.',       bio:'Ilham sangat menyukai kimia organik dan bercita-cita menjadi peneliti di LIPI.',               tags:['Kimia','Laboratorium','Sains'] },
+  { no:16, nama:'Azka Muhammad Fauzan',     peran:'Anggota',          kategori:'seni',    keahlian:'Fotografi',    cita:'Fotografer',    motto:'Setiap momen layak diabadikan.',         bio:'Saka mengabadikan kenangan kelas dengan kamera DSLR-nya yang selalu setia menemani.',         tags:['Fotografi','Visual','Kreativitas'] },
+  { no:17, nama:'Muhammad Fahmi',     peran:'Anggota',          kategori:'seni',    keahlian:'Puisi',        cita:'Guru IT',     motto:'Puisi adalah doa dalam kata.',           bio:'Fahmi sangat pandai membuat puisi yang indah. Dia juga pintar dalam hal networking.',      tags:['Puisi','Networking','Ekspresi'] },
+  { no:18, nama:'Muhammad Andhyka Nurlatif',     peran:'Anggota',          kategori:'olahraga',keahlian:'Silat',       cita:'Atlet',motto:'Silat adalah seni yang harus dilestarikan.',         bio:'Andhyka menyukai silat dan olahraga lainnya.',                    tags:['Silat','Prestasi','Ketahanan'] },
+  { no:19, nama:'Alvin Dwi Nurdiansah',        peran:'Anggota',          kategori:'sosial',  keahlian:'Jurnalistik',  cita:'Wartawan',      motto:'Fakta di atas segalanya.',               bio:'Alvin memimpin redaksi majalah kelas dan aktif menulis berita untuk media sekolah.',             tags:['Jurnalistik','Menulis','Investigasi'] },
+  { no:20, nama:'Andhika Eko Prastyo',    peran:'Anggota',          kategori:'ipa',     keahlian:'Networking',     cita:'Network Engineer',motto:'Jaringan adalah dasar kehidupan modern.',           bio:'Eko mewakili lomba kompetensi siswa jurusan TKJ dua tahun berturut-turut.',                        tags:['Networking','Teknologi','Inovasi'] },
+  { no:21, nama:'Raditya Argani Mulya',    peran:'Anggota',          kategori:'ipa',    keahlian:'Matematika',       cita:'Programmer',        motto:'CLI adalah semangat hidupku.',               bio:'Radit mengkonfigurasi mikrotik melalui CLI dengan sangat lihai.',      tags:['Coding','Programming','CLI'] },
+  { no:22, nama:'Reza Putra Harimurti',    peran:'Anggota',          kategori:'olahraga',keahlian:'Badminton',    cita:'Manajer', motto:'Fokus dan mental juara.',              bio:'Reza sangat menyukai badminton, tapi dia ingin menjadi manajer.',         tags:['Badminton','Bisnis','Disiplin'] },
+  { no:23, nama:'Huda Yudhistira',       peran:'Anggota',          kategori:'ipa',     keahlian:'Astronomi',    cita:'Astronom',      motto:'Bintang menungguku di langit.',          bio:'Huda tergabung dalam klub astronomi dan telah menemukan minor planet baru.',                    tags:['Astronomi','Sains','Eksplorasi'] },
+  { no:24, nama:'Nauval Fadil Barata',   peran:'Anggota',          kategori:'ipa',     keahlian:'AI & Data',    cita:'AI Engineer', motto:'Data adalah minyak baru.',             bio:'Nauval mengembangkan model machine learning untuk proyek lingkungan sekolah.',                   tags:['AI','Data Science','Teknologi'] },
+  { no:25, nama:'Davin Pratama', peran:'Anggota',          kategori:'seni',    keahlian:'Fashion',      cita:'Desainer Mode', motto:'Fashion adalah identitas diri.',         bio:'Davin merancang seragam kelas yang kini menjadi inspirasi sekolah lain.',                       tags:['Fashion','Desain','Kreativitas'] },
+  { no:26, nama:'Ahmad Ibro Mochodas',    peran:'Anggota',          kategori:'sosial',  keahlian:'Dakwah',       cita:'Ulama',         motto:'Ilmu tanpa amal sia-sia.',               bio:'Ibro aktif dalam kegiatan rohis dan sering mewakili sekolah dalam lomba MTQ.',                  tags:['Dakwah','Agama','Kepemimpinan'] },
+  { no:27, nama:'Luqman Amin Prasetya',       peran:'Anggota',          kategori:'seni',    keahlian:'Musik Tradisional',cita:'Seniman Budaya',motto:'Lestarikan budaya, hidup bermakna.',bio:'Luqman mahir bermain angklung dan gamelan, mewakili sekolah di festival internasional.',          tags:['Gamelan','Budaya','Seni Tradisional'] },
+  { no:28, nama:'Risqi Pratama',  peran:'Anggota',          kategori:'ipa',     keahlian:'Elektronika',  cita:'Teknisi',       motto:'Sirkuit kecil, dampak besar.',           bio:'Risqi merancang alat monitoring lingkungan berbasis Arduino untuk tugas akhirnya.',             tags:['Elektronika','IoT','Teknologi'] },
+  { no:29, nama:'Muhammad Fadilla Soliq',       peran:'Anggota',          kategori:'sosial',  keahlian:'Ekonomi', cita:'Ekonom', motto:'Bersama kita bangkit.',                     bio:'Fadil aktif dalam berbagai kegiatan sosial dan mendirikan komunitas belajar gratis.',            tags:['Sosial','Ekonom','Empati'] },
+  { no:30, nama:'Alif Novian Alhafis',      peran:'Anggota',          kategori:'olahraga',keahlian:'Pencak Silat', cita:'Pelatih Bela Diri',motto:'Men sana in corpore sano.',       bio:'Alif sabuk hitam pencak silat dan sering mewakili daerah di kejuaraan nasional.',              tags:['Silat','Bela Diri','Disiplin'] },
+  { no:31, nama:'Andy Hendra Saputra',     peran:'Anggota',          kategori:'seni',    keahlian:'Animasi',      cita:'Animator',      motto:'Karakter hidup dari imajinasimu.',       bio:'Andy membuat animasi pendek yang viral di media sosial dengan jutaan penonton.',                  tags:['Animasi','Digital Art','Kreativitas'] },
+  { no:32, nama:'Aji Bayu',      peran:'Anggota',          kategori:'ipa',     keahlian:'Matematika',   cita:'Guru Matematika',         motto:'Matematika itu indah.',                  bio:'Aji sangat pandai dalam matematika dan sering membantu teman belajar.',                   tags:['Matematika','Pengajaran','Logika'] },
+  { no:33, nama:'Yunior Aditya Saputra',      peran:'Anggota',          kategori:'seni',    keahlian:'Penulisan Fiksi',cita:'Novelis',     motto:'Setiap cerita mengubah dunia.',          bio:'Yunior telah menerbitkan novel perdananya di usia 17 tahun.',                                     tags:['Menulis','Fiksi','Imajinasi'] },
+  { no:34, nama:'Muhammad Arsya Marwino',  peran:'Anggota',          kategori:'olahraga',keahlian:'Atletik',      cita:'Kerja di Jepang','motto':'Tidak ada garis finish bagi pejuang.', bio:'Arsya meraih emas lari 100m di kejuaraan pelajar tingkat kecamatan.',                           tags:['Atletik','Lari','Ketahanan'] },
+  { no:35, nama:'Muhammad Agung Riyanto',      peran:'Anggota',          kategori:'ipa',  keahlian:'Networking',    cita:'Teknisi Jaringan',      motto:'Jaringan adalah dasar kehidupan modern.',           bio:'Agung mewakili kelas dalam berbagai kompetisi jaringan.',       tags:['Networking','Teknologi','Inovasi'] },
+];
+
+let currentFilter = 'semua';
+let currentSearch = '';
+
+function getInitial(nama) {
+  return nama.split(' ').slice(0,2).map(w => w[0]).join('');
+}
+
+function renderCards() {
+  const grid = document.getElementById('studentGrid');
+  grid.innerHTML = '';
+
+  const filtered = siswaList.filter(s => {
+    const matchFilter = currentFilter === 'semua' || s.kategori === currentFilter;
+    const matchSearch = s.nama.toLowerCase().includes(currentSearch.toLowerCase());
+    return matchFilter && matchSearch;
+  });
+
+  document.getElementById('totalSiswa').textContent = filtered.length;
+
+  if (filtered.length === 0) {
+    grid.innerHTML = '<p style="color:var(--muted);grid-column:1/-1;text-align:center;padding:4rem 0">Tidak ada siswa ditemukan.</p>';
+    return;
+  }
+
+  filtered.forEach((s, i) => {
+    const color = COLORS[s.no % COLORS.length];
+    const card = document.createElement('div');
+    card.className = 'student-card';
+    card.style.animationDelay = `${i * 0.04}s`;
+    card.innerHTML = `
+      <span class="card-num">#${String(s.no).padStart(2,'0')}</span>
+      <div class="card-avatar" style="background:${color}">${getInitial(s.nama)}</div>
+      <div class="card-name">${s.nama}</div>
+      <div class="card-role">${s.peran} · ${CATEGORIES[s.kategori]}</div>
+      <p class="card-bio">${s.bio.substring(0,100)}...</p>
+      <div class="card-tags">${s.tags.slice(0,3).map(t=>`<span class="tag">${t}</span>`).join('')}</div>
+    `;
+    card.addEventListener('click', () => openModal(s));
+    grid.appendChild(card);
+  });
+}
+
+function openModal(s) {
+  const color = COLORS[s.no % COLORS.length];
+  document.getElementById('mAvatar').style.background = color;
+  document.getElementById('mAvatar').textContent = getInitial(s.nama);
+  document.getElementById('mName').textContent = s.nama;
+  document.getElementById('mRole').textContent = `${s.peran} · ${CATEGORIES[s.kategori]}`;
+  document.getElementById('mBio').textContent = s.bio;
+  document.getElementById('mNo').textContent = s.no;
+  document.getElementById('mSkill').textContent = s.keahlian;
+  document.getElementById('mGoal').textContent = s.cita;
+  document.getElementById('mMotto').textContent = `"${s.motto}"`;
+  document.getElementById('mTags').innerHTML = s.tags.map(t=>`<span class="modal-tag">${t}</span>`).join('');
+  document.getElementById('modalOverlay').classList.add('open');
+}
+
+document.getElementById('modalClose').addEventListener('click', () => {
+  document.getElementById('modalOverlay').classList.remove('open');
+});
+document.getElementById('modalOverlay').addEventListener('click', e => {
+  if (e.target === document.getElementById('modalOverlay'))
+    document.getElementById('modalOverlay').classList.remove('open');
+});
+
+document.getElementById('filterBar').addEventListener('click', e => {
+  if (e.target.classList.contains('filter-btn')) {
+    document.querySelectorAll('.filter-btn').forEach(b => b.classList.remove('active'));
+    e.target.classList.add('active');
+    currentFilter = e.target.dataset.filter;
+    renderCards();
+  }
+});
+
+document.getElementById('searchInput').addEventListener('input', e => {
+  currentSearch = e.target.value;
+  renderCards();
+});
+
+renderCards();
+</script>
+</body>
+</html>
